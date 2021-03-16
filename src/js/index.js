@@ -1,8 +1,11 @@
 import '@/template/index.html';
 import '@/styles/preset/index.scss';
 import '@/styles/index.scss';
-import network from '@/libs';
+import { restful } from '@/libs';
 
-network.restful()
-network.graphql()
-network.websocket()
+const request = restful({baseURL: 'https://jsonplaceholder.typicode.com', b: 2})
+
+const btn = document.getElementById('btn');
+  btn.addEventListener('click', () => {
+    request({methods:'get', url: '/todos/1'});
+});

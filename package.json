@@ -42,5 +42,7 @@
     "webpack-merge": "^5.1.4",
     "webpackbar": "^5.0.0-3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
