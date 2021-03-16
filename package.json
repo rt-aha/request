@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js --env.NODE_ENV=dev --info false",
+    "server": "cd ./nodeServer && yarn dev",
     "build": "webpack --config config/webpack.prod.js --env.NODE_ENV=prod --info false"
   },
   "repository": {
