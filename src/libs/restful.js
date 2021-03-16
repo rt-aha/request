@@ -24,6 +24,4 @@ const restful = ({
   }
 }
 
-
-
 export default restful;
