@@ -1,7 +1,8 @@
 import '@/template/index.html';
 import '@/styles/preset/index.scss';
 import '@/styles/index.scss';
+import network from '@/libs';
 
-import {testingLib} from '@/libs';
-
-testingLib();
+network.restful()
+network.graphql()
+network.websocket()
