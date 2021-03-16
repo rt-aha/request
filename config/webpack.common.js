@@ -1,8 +1,12 @@
 require('dotenv').config();
 
-const envType = process.env.ENV_TYPE;
-
 const glob = require('glob');
+const webpack = require('webpack');
+const WebpackBar = require('webpackbar');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { errorLog,importantLog } = require('./utils');
 
 const getEntry = () => {
   const entry = {};
@@ -18,9 +22,12 @@ const getEntry = () => {
 };
 
 const fileList = Object.keys(getEntry());
-const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// 若沒有任何模板就跳開
+if (fileList.length === 0) {
+  console.log(errorLog('ℹ Please run command `sh sh/init.sh` first!!'));
+  throw new process.exit(1);
+}
 
 const config = {
   devtool: 'cheap-eval-source-map',
@@ -40,6 +47,24 @@ const config = {
           attributes: true,
         },
       },
+      {
+        test: /\.(png|svg|jpe?g|gif|webp)$/,
+        loader: 'url-loader',
+        options: {
+          // 用以限制須轉為 base64 的文件大小 (單位：byte)
+          limit: 8192,
+          // 超過大小及調用 file-loader
+          fallback: require.resolve('file-loader'),
+        },
+      },
+      {
+        test: /\.(eot|woff2?|ttf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: './assets/fonts/',
+        },
+      },
       // 將js轉為es5語法
       {
         test: /\.js$/,
@@ -53,18 +78,28 @@ const config = {
       },
     ],
   },
-  
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: './styles/[name].css', // css ouput到dist資料夾的位置
+      chunkFilename: '[id].css',
+    }),
+    new WebpackBar()
+  ],
   resolve: {
     alias: {
       '@': path.resolve('src/'),
     },
   },
+  stats: {
+    excludeModules: "mini-css-extract-plugin"
+  },
 };
+
 
 fileList.forEach((name) => {
   config.plugins.push(
     new HtmlWebpackPlugin({
-      template: `./src/template/${name}.${envType.toLowerCase()}`,
+      template: `./src/template/${name}.${process.env.ENV_TYPE.toLowerCase()}`,
       filename: `${name}.html`,
       chunks: ['common', 'runtime', 'vendor', 'action', `${name}`],
       minify: {
