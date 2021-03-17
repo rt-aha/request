@@ -1,6 +1,6 @@
-import restful from '@/libs/restful';
-import graphql from '@/libs/graphql';
-import websocket from '@/libs/websocket';
+import restful from './restful';
+import graphql from './graphql';
+import websocket from './websocket';
 
 export {
   restful,
