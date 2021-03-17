@@ -1,8 +1,6 @@
 const validate = (type, value) => {
-  console.log('type, value', type, value);
   if (value === '') {
     console.error(`${type} can't be empty`)
-    console.err('?');
     return false;
   }
 
