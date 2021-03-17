@@ -2,7 +2,7 @@
   "name": "libs-nework",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "./src/libs/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js --env.NODE_ENV=dev --info false",
     "server": "cd ./nodeServer && yarn dev",
