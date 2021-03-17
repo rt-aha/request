@@ -1,6 +1,5 @@
 const interceptor = {
   reqSuccess(config) {
-    console.log('res success', config);
     return config;
   },
   reqFail(error) {
@@ -8,7 +7,6 @@ const interceptor = {
     return Promise.reject(error);
   },
   resSuccess(response) {
-    console.log('req success', response);
     return response;
   },
   resFail(error) {
