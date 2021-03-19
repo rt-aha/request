@@ -1,41 +1,18 @@
 require('dotenv').config();
 
-const glob = require('glob');
-const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { errorLog,importantLog } = require('./utils');
 
-const getEntry = () => {
-  const entry = {};
-  glob.sync('./src/js/*.js').forEach((name) => {
-    const start = name.indexOf('/src/js/') + 8; //前面路徑共8個位元的字串，設定的資料夾路徑不同，也要記得更改位元數喔!
-    const end = name.length - 3; //減去附檔名 .js 共三個位元的字串
-    const eArr = [];
-    const n = name.slice(start, end); //取得每個js的名稱
-    eArr.push(name); //push至陣列中
-    entry[n] = eArr; //就會產生多筆入口的陣列囉！
-  });
-  return entry;
-};
-
-const fileList = Object.keys(getEntry());
-
-// 若沒有任何模板就跳開
-if (fileList.length === 0) {
-  console.log(errorLog('ℹ Please run command `sh sh/init.sh` first!!'));
-  throw new process.exit(1);
-}
+// console.log('path ?', path.resolve('./src/index.js'));
 
 const config = {
   devtool: 'cheap-eval-source-map',
-  entry: getEntry(),
   output: {
-    path: path.resolve('dist'),
-    filename: 'js/[name].[hash:8].js', // js ouput到dist資料夾的位置
-    chunkFilename: 'js/[name].shared.js', // js ouput到dist資料夾的位置
+    path: path.resolve('libs'),
+    filename: 'index.js', // js ouput到libs資料夾的位置
+    chunkFilename: 'js/[name].shared.js', // js ouput到libs資料夾的位置
   },
   module: {
     rules: [
@@ -80,10 +57,10 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: './styles/[name].css', // css ouput到dist資料夾的位置
+      filename: './styles/[name].css', // css ouput到libs資料夾的位置
       chunkFilename: '[id].css',
     }),
-    new WebpackBar()
+    new WebpackBar(),
   ],
   resolve: {
     alias: {
@@ -95,20 +72,5 @@ const config = {
   },
 };
 
-
-fileList.forEach((name) => {
-  config.plugins.push(
-    new HtmlWebpackPlugin({
-      template: `./src/template/${name}.${process.env.ENV_TYPE.toLowerCase()}`,
-      filename: `${name}.html`,
-      chunks: ['common', 'runtime', 'vendor', 'action', `${name}`],
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true, // 壓縮 HTML
-        removeAttributeQuotes: true,
-      },
-    }),
-  );
-});
 
 module.exports = config;

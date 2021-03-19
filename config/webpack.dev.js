@@ -2,14 +2,19 @@ require('dotenv').config();
 
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {importantLog} = require('./utils');
+
 console.log(`${importantLog('ℹ')}: Project is running at ${importantLog(`http://localhost:${process.env.ENV_DEV_PORT}/`)}`);
 
 const devConfig = {
   mode: 'development',
+  entry: {
+    index: './src/index.js',
+  },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
     rules: [
@@ -39,8 +44,20 @@ const devConfig = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/template/index.html',
+      filename: 'index.html',
+      chunks: ['common', 'runtime', 'vendor', 'action', 'index'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true, // 壓縮 HTML
+        removeAttributeQuotes: true,
+      },
+    }),
+  ],
   devServer: {
-    contentBase: path.resolve('dist'), //本地服务器所加载的页面所在的目录
+    contentBase: path.resolve('libs'), //本地服务器所加载的页面所在的目录
     port: process.env.ENV_DEV_PORT, // port
     hot: true, // 熱重載，僅更新不一樣的部分
     open: false, // 是否自動開啟網頁

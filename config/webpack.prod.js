@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const prodConfig = {
   mode: 'development',
+  entry: './src/index.js',
   devtool: 'cheap-eval-source-map',
   module: {
     rules: [
