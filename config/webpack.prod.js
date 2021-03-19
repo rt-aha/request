@@ -4,10 +4,13 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const path = require('path');
+// console.log('p~~~', path.resolve('./src/index.js'));
+
 const prodConfig = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
+    index: path.resolve('./src/index.js'),
   },
   devtool: 'cheap-eval-source-map',
   module: {
