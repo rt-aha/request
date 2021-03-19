@@ -1,7 +1,7 @@
-import '@/styles/index.scss'
-import { restful } from '@/index';
+import '../styles/index.scss'
+import { restful } from '../index';
 
-const request = restful({ baseURL: 'http://127.0.0.1:8010', version: '' })
+const request = restful({ baseURL: 'http://127.0.0.1:8010', version: '', useAuth: false })
 
 
 get.addEventListener('click', async () => {
