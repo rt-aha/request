@@ -10,6 +10,7 @@ const config = {
     path: path.resolve('libs'),
     filename: 'index.js', // js ouput到libs資料夾的位置
     chunkFilename: 'js/[name].shared.js', // js ouput到libs資料夾的位置
+    umdNamedDefine: true,
   },
   module: {
     rules: [
