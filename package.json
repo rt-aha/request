@@ -2,7 +2,7 @@
   "name": "fe-webpack",
   "version": "1.0.0",
   "description": "",
-  "main": "./libs/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js --env.NODE_ENV=dev --info false",
     "build": "webpack --config config/webpack.prod.js --env.NODE_ENV=prod --info false",
