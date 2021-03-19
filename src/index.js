@@ -1,3 +1,9 @@
-// import './template/index.html';
+import restful from './restful';
+import graphql from './graphql';
+import websocket from './websocket';
 
-console.log('console~12')
+export default {
+  restful,
+  graphql,
+  websocket,
+}

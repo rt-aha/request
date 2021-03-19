@@ -13,7 +13,7 @@ console.log(`${importantLog('ℹ')}: Project is running at ${importantLog(`http:
 const devConfig = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
+    index: './src/testing/index.js',
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {

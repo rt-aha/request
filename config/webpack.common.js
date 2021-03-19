@@ -2,10 +2,7 @@ require('dotenv').config();
 
 const WebpackBar = require('webpackbar');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-// console.log('path ?', path.resolve('./src/index.js'));
 
 const config = {
   devtool: 'cheap-eval-source-map',
