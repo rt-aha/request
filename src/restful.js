@@ -17,7 +17,7 @@ import validate from './utils/validate';
  */
 const restful = ({
   baseURL = '',
-  timeout = 1000,
+  timeout = 30000,
   headers: defaultHeaders = {},
   version: ver = '',
   useAuth: auth = true,
