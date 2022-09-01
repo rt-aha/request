@@ -1,4 +1,4 @@
-import { jsonplaceholderRequset } from '@/api';
+import { jsonplaceholderRequset } from '@/network';
 
 export const mockJsonPlaceholder = async () => {
   const res = await jsonplaceholderRequset({
