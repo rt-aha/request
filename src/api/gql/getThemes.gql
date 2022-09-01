@@ -1,0 +1,51 @@
+query getThemeList($in: ThemeSearchWithPagination!) {
+  getThemeList(in: $in) {
+    data {
+      activationDate
+      cover
+      createdAt
+      description
+      name
+      status
+      themeUid
+      updatedAt
+      innerCover
+    }
+    paginationInfo {
+      currentPage
+      pageSize
+      total
+    }
+  }
+}
+
+query getTheme($in: String!) {
+  getTheme(themeUid: $in) {
+    cover
+    activationDate
+    createdAt
+    description
+    innerCover
+    name
+    status
+    themeContents {
+      btnLabel
+      btnStatus
+      btnUrl
+      cover
+      createdAt
+      description
+      note
+      order
+      originUid
+      targetTitle
+      targetType
+      title
+      type
+      updatedAt
+      url
+    }
+    themeUid
+    updatedAt
+  }
+}
